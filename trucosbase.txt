@@ -1,0 +1,21 @@
+//ALTAS
+            basesita admin = new basesita(this,"Administracion",null,1);
+            SQLiteDatabase basesita = admin.getWritableDatabase();
+//Declarar Variables
+ContentValues registro = new ContentValues();
+registro.put("columna",variable);
+basesita.insert("tabla",null,registro);
+basesita.close();
+
+//CONSULTAS
+basesita admin = new basesita(this,"Administración",null,1);
+SQLiteDatabase basesita = admin.getReadableDatabase();
+
+Cursor fila = basesita.rawQuery("select columnas from tabla where clave="+ codigo, null);
+if(fila.moveToFirst()){
+	variable.setText(fila.getString(numero de columna en orden));
+}
+else{
+	Toast.makeText no se encontró nada
+}
+fila.close();
