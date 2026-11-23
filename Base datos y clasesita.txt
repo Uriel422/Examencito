@@ -17,6 +17,8 @@ public class baseempresa extends SQLiteOpenHelper {
 
 
 //
+import java.util.ArrayList;
+
 public class Clasesita {
     public ArrayList<Datitos> ALempleaditos;
 
@@ -26,18 +28,6 @@ public class Clasesita {
     }
 
     public void agregar() {
-        int[] clave = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
-        String[] nombre = {"Flores Gómez René", "Ramos Gómez Daniel", "Zavala Romo Martha", "Huerta Torres José", "Ávila Robles Gabriela", "Soto Bolaños Sonia", "Rodríguez flores Esther", "Rocha Gómez Jesús", "Robles Soto Sonia", "Rocha Gómez Jesús", "Flores Prado Norma", "Ramos Flores José", "Robles Nieto Miguel", "Rocha Macías Norma", "Márquez Ramos Josefina", "Benítez Alarcón Mario", "Javier Márquez Sánchez", "Daniel Romo Torres", "Enrique Ramírez Solis"};
-        String[] puesto = {"Programación", "Programación", "Programación", "Programación", "Ingeniería", "Ingeniería", "Ingeniería", "Ingeniería", "Ingeniería", "R. Humanos", "R. Humanos", "R. Humanos", "R. Humanos", "Programación", "R. Humanos", "Programación", "R. Humanos", "R. Humanos", "R. Humanos"};
-        String[] depto = {"Informática", "Documentación", "Documentación", "Informática", "Construcción", "Construcción", "Construcción", "Ser. Grales.", "Ser. Grales.", "Contabilidad", "Contabilidad", "Contabilidad", "Nómina", "Documentación", "Contabilidad", "Documentación", "Nómina", "Nómina", "Nómina"};
-        int[] sueldo = {10000, 5000, 5000, 5000, 3000, 3000, 3000, 3000, 3000, 7000, 7000, 7000, 8000, 8000, 8000, 7000, 6000, 6000, 5000};
-        for (int i = 0; i < clave.length; i++) {
-            Datitos objetito = new Datitos();
-            objetito.setClave(clave[i]);
-            objetito.setNombre(nombre[i]);
-            objetito.setPuesto(puesto[i]);
-            objetito.setDepto(depto[i]);
-            objetito.setSueldo(sueldo[i]);
-            ALempleaditos.add(objetito);
-        }
+    Datitos objetito = new Datitos();
     }
+}
