@@ -1,0 +1,59 @@
+package com.example.basededatos;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.Nullable;
+
+public class basesita extends SQLiteOpenHelper {
+    public basesita(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table cinito(clave int primary key, descripcion text, precio int)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+}
+
+//En otra clase
+//Altas
+basesita admin = new basesita(this,"Administracion",null,1);
+SQLiteDatabase basesita = admin.getWritableDatabase();
+
+//Declarar Variables aqui
+ContentValues registro = new ContentValues();
+registro.put("clave",llavesita);
+registro.put("descripcion",titulo);
+registro.put("precio",costito);
+basesita.insert("cinito",null,registro);
+basesita.close();
+
+
+//Consultas:
+SQLiteDatabase basesita = admin.getReadableDatabase();
+if(!codigo.isEmpty()){
+                Cursor fila = basesita.rawQuery("select descripcion,precio from cinito where clave=" + codigo,null);
+                if (fila.moveToFirst()){
+                    android.util.Log.d("CONSULTA","SI SE ENCONTRÓ EL REGISTRO!");
+
+                    etdescripcion.setText(fila.getString(0));
+                    etprecio.setText(fila.getString(1));
+                }
+                else{
+                    android.util.Log.d("CONSULTA","NO SE ENCONTRÓ NADA CON ESA CLAVE");
+                    Toast.makeText(this,"No existe ningún registro con esa clave",Toast.LENGTH_SHORT).show();
+                    etdescripcion.setText("");
+                    etprecio.setText("");
+                }
+                fila.close();
+            }else{
+                Toast.makeText(this,"Introduce una clave para buscar",Toast.LENGTH_SHORT).show();
+            }
+            basesita.close();
+

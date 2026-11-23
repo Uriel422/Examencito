@@ -1,0 +1,56 @@
+    private void cargarConsulta2() {
+        SQLiteDatabase dbR = admin.getReadableDatabase();
+        int totalGeneral = 0;
+        // Acumulador para sumar todos los sueldos
+        try {
+            Cursor cursor = dbR.rawQuery("SELECT clave, nombre, puesto, depto, sueldo FROM empleaditos ORDER BY puesto, depto ASC", null);
+            if (cursor.moveToFirst()) {
+                do {
+                    final int clave = cursor.getInt(0);
+                    String nombre = cursor.getString(1);
+                    String puesto = cursor.getString(2);
+                    String depto = cursor.getString(3);
+                    int sueldo = cursor.getInt(4);
+                    // Sumamos al total general
+                    totalGeneral += sueldo;
+                    // Creación de la fila de la tabla dinamicamente
+                    TableRow fila = new TableRow(this);
+                    fila.setPadding(4, 10, 4, 10);
+                    TextView txtClave = new TextView(this);
+                    TextView txtNombre = new TextView(this);
+                    TextView txtPuesto = new TextView(this);
+                    TextView txtDepto = new TextView(this);
+                    TextView txtSueldo = new TextView(this);
+                    txtClave.setText(String.valueOf(clave));
+                    txtNombre.setText(nombre);
+                    txtPuesto.setText(puesto);
+                    txtDepto.setText(depto);
+                    txtSueldo.setText("$" + sueldo);
+                    fila.addView(txtClave);
+                    fila.addView(txtNombre);
+                    fila.addView(txtPuesto);
+                    fila.addView(txtDepto);
+                    fila.addView(txtSueldo);
+                    // Evento de clic para devolver la clave en un Toast
+                    fila.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(Consulta2.this, "Clave del registro: " + clave, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    tablita2.addView(fila);
+                } while (cursor.moveToNext());
+                // ==========================================
+                // FILA FINAL: Mostrar el Total General de Sueldos
+                // ==========================================
+            }
+            else {
+                Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            }
+            cursor.close();
+            dbR.close();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al consultar: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            dbR.close();
+        }
+    }
